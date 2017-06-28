@@ -1,0 +1,28 @@
+---
+# This task must be run as root !
+
+#- name: "Redhat family specific actions"
+#  include: init-redhat.yml
+#  when: ansible_os_family == "RedHat"
+
+- name: "Debin family specific actions"
+  include: init-debian.yml
+  when: ansible_os_family == "Debian"
+
+- name: "Install sudo"
+  package: name=sudo state=present
+
+- name: "Nopasswd for sudo group in sudoer"
+  lineinfile: "dest=/etc/sudoers state=present regexp='^%sudo' line='%sudo ALL=(ALL) NOPASSWD: ALL'"
+
+- name: "Check for sudo group"
+  group: name=sudo state=present
+
+- name: "Creating sys_ansible user"
+  user: name=sys_ansible group="sudo"
+
+- name: "Install ssh pub key for sys_ansible "
+  authorized_key:
+    user: sys_ansible
+    key: "{{ lookup('file', 'roles/system/files/sys_ansible.pub') }}"
+    manage_dir: yes

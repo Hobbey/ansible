@@ -1,0 +1,5 @@
+- name: Initialize server and prepare ansible user
+  hosts: all
+
+  tasks:
+    - include: roles/system/tasks/init-server.yml

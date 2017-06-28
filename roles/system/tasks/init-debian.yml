@@ -1,0 +1,13 @@
+---
+#- name: "add apt proxy config file"
+#  copy: src=../roles/system/files/apt.conf dest=/etc/apt/apt.conf mode=644
+#  become: yes
+
+- name: "add local apt source"
+  copy:
+    src: roles/system/files/sources_ubuntu_16_04_sh.list
+    dest: /etc/apt/sources.list
+  become: yes
+
+- name: "apt update if needed"
+  apt: update_cache=yes cache_valid_time=3600
