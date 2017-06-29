@@ -1,6 +1,6 @@
 ---
 #- name: "add apt proxy config file"
-#  copy: src=../roles/system/files/apt.conf dest=/etc/apt/apt.conf mode=644
+#  copy: src=roles/system/files/apt.conf dest=/etc/apt/apt.conf mode=644
 #  become: yes
 
 - name: "add local apt source"

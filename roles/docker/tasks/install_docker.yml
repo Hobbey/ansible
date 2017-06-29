@@ -1,0 +1,13 @@
+---
+
+- name: "Install docker dependency package on Ubuntu 16.04"
+  package: name=libltdl7 state=present
+  become: yes
+  when: (ansible_distribution == "Ubuntu" and ansible_distribution_version == "16.04")
+
+- name: "install docker package on Ubuntu 16.04"
+  copy:
+    src: roles/docker/files/docker-ce_17.03.2~ce-0~ubuntu-xenial_amd64.deb
+    dest: /tmp/docker.deb
+  command: /usr/bin/dpkg -i /tmp/docker.deb
+  become: yes
