@@ -1,0 +1,9 @@
+- name: "init basic service"
+  hosts: all
+
+  tasks:
+    - include: roles/system/tasks/basic_shell_tools.yml
+    - include: roles/ntp/tasks/install.yml
+    - include: roles/snmp/tasks/install.yml
+    - include: roles/docker/tasks/install_manually.yml
+    - include: roles/ssh/tasks/ssh_root_setup.yml

@@ -1,4 +1,4 @@
-- name: Initialize server and prepare ansible user
+- name: "Initialize server and prepare ansible user"
   hosts: all
 
   tasks:

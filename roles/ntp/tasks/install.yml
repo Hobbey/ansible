@@ -1,0 +1,19 @@
+---
+- name: "install ntpd"
+  package: name=ntp
+  become: yes
+  when: ansible_os_family == 'RedHat' or ansible_os_family == 'Debian'
+
+- name: "copy config"
+  copy: src=../roles/ntp/files/ntp.conf dest=/etc/ntp.conf mode=644
+  become: yes
+
+- name: "restart ntp service"
+  service: name=ntpd state=restarted enabled=yes
+  become: yes
+  when: ansible_os_family == 'RedHat'
+
+- name: "restart ntp service"
+  service: name=ntp state=restarted enabled=yes
+  become: yes
+  when: ansible_os_family == 'Debian'
