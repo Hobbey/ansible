@@ -2,4 +2,4 @@
   hosts: all
 
   tasks:
-    - include: roles/system/tasks/init-server.yml
+    - include: roles/system/tasks/init_server.yml

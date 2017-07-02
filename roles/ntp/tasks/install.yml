@@ -5,7 +5,7 @@
   when: ansible_os_family == 'RedHat' or ansible_os_family == 'Debian'
 
 - name: "copy config"
-  copy: src=../roles/ntp/files/ntp.conf dest=/etc/ntp.conf mode=644
+  copy: src=roles/ntp/files/ntp.conf dest=/etc/ntp.conf mode=644
   become: yes
 
 - name: "restart ntp service"

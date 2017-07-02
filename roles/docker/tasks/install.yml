@@ -1,0 +1,6 @@
+---
+- name: "Install docker on Ubuntu"
+  include: install_ubuntu.yml
+  when: ansible_distribution == "Ubuntu"
+
+

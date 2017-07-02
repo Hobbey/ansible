@@ -1,0 +1,6 @@
+- name: "install(default)/update/downgrade docker"
+  hosts: all
+
+  tasks:
+    - include: roles/docker/task/install.yml
+
