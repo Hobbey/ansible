@@ -1,4 +1,4 @@
-- name: "init basic service"
+- name: "Install basic service"
   hosts: all
 
   tasks:

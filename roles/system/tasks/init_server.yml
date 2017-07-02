@@ -1,9 +1,9 @@
 ---
 # This task must be run as root !
 
-#- name: "Redhat family specific actions"
-#  include: init-redhat.yml
-#  when: ansible_os_family == "RedHat"
+- name: "Redhat family specific actions"
+  include: init_server_redhat.yml
+  when: ansible_os_family == "RedHat"
 
 - name: "Debin family specific actions"
   include: init_server_debian.yml
@@ -19,9 +19,9 @@
   group: name=sudo state=present
 
 - name: "Creating sys_ansible user"
-  user: name=sys_ansible group="sudo"
+  user: name=sys_ansible group=sudo
 
-- name: "Install ssh pub key for sys_ansible "
+- name: "Install ssh pub key for sys_ansible"
   authorized_key:
     user: sys_ansible
     key: "{{ lookup('file', 'roles/system/files/sys_ansible.pub') }}"

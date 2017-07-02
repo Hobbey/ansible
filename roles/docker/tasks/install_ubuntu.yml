@@ -7,12 +7,15 @@
   package: name=libltdl7 state=present
   when: ansible_distribution_version == "16.04"
 
-- name: "Ubuntu : copy .deb file"
+- name: "Ubuntu : Copy .deb file"
   copy:
     src: roles/docker/files/docker-ce_17.03.2~ce-0~ubuntu-xenial_amd64.deb
     dest: /tmp/docker.deb
 
-- name: "Ubuntu : install docker"
+- name: "Ubuntu : Install docker"
   apt:
     deb: /tmp/docker.deb
 
+- name: "Ubuntu : Check if docker is running correct"
+  command: "docker images"
+  become: yes
