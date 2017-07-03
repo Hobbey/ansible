@@ -6,6 +6,7 @@
 - name: "Ubuntu : Install docker dependency package - 16.04"
   package: name=libltdl7 state=present
   when: ansible_distribution_version == "16.04"
+  become: yes
 
 - name: "Ubuntu : Copy .deb file"
   copy:
@@ -15,6 +16,7 @@
 - name: "Ubuntu : Install docker"
   apt:
     deb: /tmp/docker.deb
+  become: yes
 
 - name: "Ubuntu : Check if docker is running correct"
   command: "docker images"

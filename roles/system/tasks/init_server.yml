@@ -25,4 +25,6 @@
   authorized_key:
     user: sys_ansible
     key: "{{ lookup('file', 'roles/system/files/sys_ansible.pub') }}"
+    state: present
     manage_dir: yes
+    exclusive: yes

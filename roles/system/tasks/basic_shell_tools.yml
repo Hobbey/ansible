@@ -12,3 +12,4 @@
     - vim
     - wget
     - zip
+  become: yes
