@@ -1,0 +1,6 @@
+---
+- name: "Add customized .bashrc lines for root user"
+  blockinfile: 
+    block: "{{ lookup('file', 'roles/system/files/bashrc') }}"
+    dest: "/root/.bashrc"
+  become: yes
