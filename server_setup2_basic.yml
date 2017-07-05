@@ -5,5 +5,5 @@
     - include: roles/system/tasks/basic_shell_tools.yml
     - include: roles/ntp/tasks/install.yml
 #    - include: roles/snmp/tasks/install.yml
-#    - include: roles/ssh/tasks/ssh_root_setup.yml
+    - include: roles/ssh/tasks/ssh_root_setup.yml
     - include: roles/system/tasks/root_bashrc.yml

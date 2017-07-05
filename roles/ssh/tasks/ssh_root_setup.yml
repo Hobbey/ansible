@@ -1,0 +1,21 @@
+---
+# Copy admin ssh pub key to root authorized_keys then disable root password login
+
+- name: "Install admin ssh pub keys for root"
+  authorized_key:
+    user: root
+    state: present
+    manage_dir: yes
+    key: "{{ item }}"
+  become: yes
+  with_file:
+    - roles/ssh/files/admin1.pub
+    - roles/ssh/files/admin2.pub
+
+- name: "Block root password login"
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    state: present
+    regexp: "^PermitRootLogin"
+    line: "PermitRootLogin without-password"
+  become: yes
