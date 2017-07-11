@@ -1,6 +1,18 @@
+# PS1 :
+# Color begin with \[\033[X;Y;Zm\]   
+# end with another color, or \[\033[0m\]
+# basic PS1 without color: PS1="\u@\h \t \$? \W \\$ " or PS1="\u@\h \t \$? \w\n\\$ "
+
+# PS1 root user in red
+export PS1="\[\033[38;5;1m\]\u\[\033[38;5;15m\]@\[\033[38;5;34m\]\h \[\033[38;5;168m\]\t \[\033[38;5;15m\]\$? \[\033[38;5;133m\]\w \[\033[0m\] \n\[\033[0;34m\]\\$\[\033[0m\] "
+# PS1 common user in green
+#export PS1="\[\033[38;5;34m\]\u\[\033[38;5;15m\]@\[\033[38;5;34m\]\h \[\033[38;5;168m\]\t \[\033[38;5;15m\]\$? \[\033[38;5;133m\]\w \[\033[0m\] \n\[\033[0;34m\]\\$\[\033[0m\] "
+# PS1 in container (the "C" will remind me i am in container)
+#export PS1="\[\033[0;32m\]\u@\h\[\033[0m\] [C] \W \\$ "
+
+
 # system
 LANG="en_US.UTF-8"
-PS1='\[\033[0;32m\]\u\[\033[0;33m\]@\[\033[0;35m\]\h \[\033[0;37m\]\t \[\033[0;36m\]\w\[\033[0m\]\n\[\033[0;34m\]\$\[\033[0m\] '
 export HISTTIMEFORMAT="%F %T : "
 alias j='journalctl'
 alias s='systemctl'
@@ -13,6 +25,7 @@ alias cdd='cd /var/lib/docker/'
 # ls -> l
 alias ls='ls --color=auto'
 alias ll='ls -lsh --time-style="long-iso" --group-directories-first'
+# show hidden file only
 alias l.='ls -ld  --time-style="long-iso" --group-directories-first .*'
 
 # docker -> d
@@ -21,4 +34,5 @@ alias dps='docker ps -a'
 alias dcl='docker ps -a | grep Exited | awk '\''{print $1}'\'' | xargs -i docker rm {}'
 alias di='docker images'
 alias dcli='docker images | grep "<none>" | awk '\''{print $3}'\'' | xargs -i docker rmi {}'
-alias dt='docker run -ti --rm docker-base:14.04 /bin/bash'
+alias dt='docker run -ti --rm docker-registry.hobbey.com/public/docker-base:16.04 /bin/bash'
+
