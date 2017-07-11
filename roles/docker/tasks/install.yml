@@ -1,6 +1,10 @@
 ---
 - name: "Install docker on Ubuntu"
-  include: install_ubuntu.yml
-  when: ansible_distribution == "Ubuntu"
+  include: install_ubuntu_16_04.yml
+  when: (ansible_distribution == "Ubuntu" and ansible_distribution_version == "16.04")
 
+#
 
+- name: "Check if docker is running correct"
+  command: "docker images"
+  become: yes

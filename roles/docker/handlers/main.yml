@@ -1,9 +1,9 @@
 ---
-- name: "stop docker"
+- name: stop docker
   service: name=docker state=stopped
 
-- name: "start docker"
+- name: start docker
   service: name=docker state=started
     
-- name: "restart docker"
+- name: restart docker
   service: name=docker state=restarted

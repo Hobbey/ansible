@@ -1,0 +1,33 @@
+- name: "Ubuntu 16.04 : Install docker dependency package"
+  package: name=libltdl7 state=present
+  become: yes
+
+- name: "Ubuntu 16.04 : Copy .deb file"
+  copy:
+    src: roles/docker/files/docker-ce_17.03.2~ce-0~ubuntu-xenial_amd64.deb
+    dest: /tmp/docker.deb
+
+- name: "Ubuntu : Install docker"
+  apt:
+    deb: /tmp/docker.deb
+  become: yes
+
+- name: "Ubuntu 16.04 : Create systemd config folder"
+  file:
+    path: /etc/systemd/system/docker.service.d/
+    state: directory
+  become: yes
+
+- name: "Ubuntu 16.04 : Copy config file"
+  copy:
+    src: roles/docker/files/docker_systemd.conf
+    dest: /etc/systemd/system/docker.service.d/docker.conf
+  become: yes
+#  notify:
+#    - restart docker
+
+# notify can't found handler after ansible version 2.20
+
+- name: restart docker
+  service: name=docker state=restarted
+  become: yes
