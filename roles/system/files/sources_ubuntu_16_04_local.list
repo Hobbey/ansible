@@ -1,0 +1,4 @@
+# Ubuntu 16.04 Xenial Xerus -- Mirror located in XXX
+deb http://apt-mirror.hobbey.com/ubuntu/ xenial main restricted universe multiverse
+deb http://apt-mirror.hobbey.com/ubuntu/ xenial-security main restricted universe multiverse
+deb http://apt-mirror.hobbey.com/ubuntu/ xenial-updates main restricted universe multiverse
