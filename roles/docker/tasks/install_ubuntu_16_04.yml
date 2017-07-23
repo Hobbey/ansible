@@ -28,6 +28,10 @@
 
 # notify can't found handler after ansible version 2.20
 
+- name: "Ubuntu 16.04 : systemd reload"
+  command: "systemctl daemon-reload"
+  become: yes
+
 - name: restart docker
   service: name=docker state=restarted
   become: yes
