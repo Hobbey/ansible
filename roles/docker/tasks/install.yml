@@ -1,5 +1,9 @@
 ---
 - name: "Install docker on Ubuntu"
+  include: install_ubuntu_14_04.yml
+  when: (ansible_distribution == "Ubuntu" and ansible_distribution_version == "14.04")
+
+- name: "Install docker on Ubuntu"
   include: install_ubuntu_16_04.yml
   when: (ansible_distribution == "Ubuntu" and ansible_distribution_version == "16.04")
 
@@ -7,4 +11,12 @@
 
 - name: "Check if docker is running correct"
   command: "docker images"
+  become: yes
+
+- name: "Install python-pip"
+  package: name=python-pip state=present
+  become: yes
+
+- name: "Install docker-py (prerequisite for ansible docker)"
+  pip: name=docker-py
   become: yes

@@ -1,0 +1,37 @@
+- name: "Ubuntu 14.04 : Install docker dependency package"
+  package: name={{ item }} state=present
+  with_items:
+    - libsystemd-journal0
+    - linux-image-extra-{{ ansible_kernel }}
+  become: yes
+
+- name: "Ubuntu 14.04 : Copy .deb file"
+  copy:
+    src: roles/docker/files/docker-engine_{{ docker_version }}-0~trusty_amd64.deb
+    dest: /tmp/docker.deb
+
+- name: "Ubuntu : Install docker"
+  apt:
+    deb: /tmp/docker.deb
+  become: yes
+
+- name: "Ubuntu 14.04 : Configuration | Copy config file"
+  copy:
+    src: roles/docker/files/docker_init.conf
+    dest: /etc/default/docker
+  become: yes
+
+#- name: "Ubuntu 14.04 : Configuration | Set up authentication for docker registry"
+#  get_url:
+#    url: https://docker-registry.hobbey.com/v2/auth
+#    dest: /root/.dockercfg
+#    url_username: "{{ docker_user }}"
+#    url_password: "{{ docker_pass }}"
+#    force: yes
+#    force_basic_auth: yes
+#    validate_certs: False
+#  become: yes
+
+- name: "Ubuntu : restart docker"
+  service: name=docker state=restarted
+  become: yes
