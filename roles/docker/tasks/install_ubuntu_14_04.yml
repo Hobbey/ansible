@@ -21,17 +21,6 @@
     dest: /etc/default/docker
   become: yes
 
-#- name: "Ubuntu 14.04 : Configuration | Set up authentication for docker registry"
-#  get_url:
-#    url: https://docker-registry.hobbey.com/v2/auth
-#    dest: /root/.dockercfg
-#    url_username: "{{ docker_user }}"
-#    url_password: "{{ docker_pass }}"
-#    force: yes
-#    force_basic_auth: yes
-#    validate_certs: False
-#  become: yes
-
 - name: "Ubuntu : restart docker"
   service: name=docker state=restarted
   become: yes

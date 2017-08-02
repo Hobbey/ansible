@@ -4,7 +4,7 @@
 
 - name: "Ubuntu 16.04 : Copy .deb file"
   copy:
-    src: roles/docker/files/docker-ce_17.03.2~ce-0~ubuntu-xenial_amd64.deb
+    src: roles/docker/files/docker-ce_{{ docker_version }}~ce-0~ubuntu-xenial_amd64.deb
     dest: /tmp/docker.deb
 
 - name: "Ubuntu : Install docker"
@@ -23,15 +23,11 @@
     src: roles/docker/files/docker_systemd.conf
     dest: /etc/systemd/system/docker.service.d/docker.conf
   become: yes
-#  notify:
-#    - restart docker
-
-# notify can't found handler after ansible version 2.20
 
 - name: "Ubuntu 16.04 : systemd reload"
   command: "systemctl daemon-reload"
   become: yes
 
-- name: restart docker
+- name: "Ubuntu : restart docker"
   service: name=docker state=restarted
   become: yes

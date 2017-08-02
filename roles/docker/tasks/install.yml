@@ -7,11 +7,24 @@
   include: install_ubuntu_16_04.yml
   when: (ansible_distribution == "Ubuntu" and ansible_distribution_version == "16.04")
 
-#
+###
+
+#- name: "Ubuntu : Configuration | Set up authentication for docker registry"
+#  get_url:
+#    url: https://docker-registry.hobbey.com/v2/auth
+#    dest: /root/.dockercfg
+#    url_username: "{{ docker_user }}"
+#    url_password: "{{ docker_pass }}"
+#    force: yes
+#    force_basic_auth: yes
+#    validate_certs: False
+#  become: yes
 
 - name: "Check if docker is running correct"
   command: "docker images"
   become: yes
+
+###
 
 - name: "Install python-pip"
   package: name=python-pip state=present
